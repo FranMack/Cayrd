@@ -1,53 +1,59 @@
-"use client"
+"use client";
 
-import { useRef } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import Image from "next/image"
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
+import { useRef } from "react";
 
 const activities = [
   {
-    title: "Fútbol Masculino",
+    title: "Fútbol A",
     description:
-      "Grupos por nivel, 3 veces por semana. Preparación física y técnica con metodología profesional.",
+      "Martes y jueves de 17 a 18. Grupo de inicio y adaptación para entrar en ritmo.",
     tag: "MÁS POPULAR",
     image: "images/futbol.jpg",
   },
   {
-    title: "Hockey Femenino",
+    title: "Fútbol B",
     description:
-      "Técnica, táctica y comunidad. Grupos mixtos con enfoque competitivo y recreativo.",
+      "Martes y jueves de 18 a 19. Trabajo técnico y de intensidad media.",
+    tag: null,
+    image: "images/futbol.jpg",
+  },
+  {
+    title: "Fútbol C",
+    description:
+      "Martes y jueves de 19 a 20. Grupo con mayor ritmo y enfoque competitivo.",
+    tag: null,
+    image: "images/futbol.jpg",
+  },
+  {
+    title: "Hockey",
+    description:
+      "Técnica, táctica y comunidad. Entrenamiento con enfoque competitivo y recreativo.",
     tag: null,
     image: "images/hockey.jpg",
   },
-  {
-    title: "Entrenamiento Personalizado",
-    description:
-      "Planificación individual con seguimiento semana a semana de tus objetivos.",
-    tag: null,
-        image: "images/personalizado.jpg",
-  },
- 
-]
+];
 
 export function Activities() {
-  const scrollRef = useRef<HTMLDivElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      const scrollAmount = 320
+      const scrollAmount = 320;
       scrollRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
-      })
+      });
     }
-  }
+  };
 
   return (
     <section id="actividades" className="bg-background py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="mb-12 flex items-end justify-between">
-          <h2 className="font-[var(--font-bebas)] text-4xl tracking-wide sm:text-5xl">
+          <h2 className="font-(--font-bebas) text-4xl tracking-wide sm:text-5xl">
             Nuestras <span className="text-orange">Actividades</span>
           </h2>
           <div className="hidden gap-2 sm:flex">
@@ -77,7 +83,7 @@ export function Activities() {
           {activities.map((activity, index) => (
             <div
               key={index}
-              className="group relative min-w-[280px] max-w-[320px] flex-shrink-0 snap-start overflow-hidden rounded-xl bg-card transition-all hover:-translate-y-2 hover:shadow-xl hover:shadow-orange/10"
+              className="group relative min-w-70 max-w-[320px] shrink-0 snap-start overflow-hidden rounded-xl bg-card transition-all hover:-translate-y-2 hover:shadow-xl hover:shadow-orange/10"
             >
               {/* Orange accent line */}
               <div className="absolute top-0 left-0 right-0 z-10 h-1 bg-orange" />
@@ -90,7 +96,7 @@ export function Activities() {
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-card to-transparent" />
                 {activity.tag && (
                   <div className="absolute top-4 right-4 rounded-full bg-orange px-3 py-1 text-xs font-bold text-white">
                     {activity.tag}
@@ -100,7 +106,7 @@ export function Activities() {
 
               {/* Content */}
               <div className="p-6">
-                <h3 className="mb-3 font-[var(--font-bebas)] text-2xl tracking-wide">
+                <h3 className="mb-3 font-(--font-bebas) text-2xl tracking-wide">
                   {activity.title}
                 </h3>
                 <p className="text-sm leading-relaxed text-muted-foreground">
@@ -122,5 +128,5 @@ export function Activities() {
         </div>
       </div>
     </section>
-  )
+  );
 }

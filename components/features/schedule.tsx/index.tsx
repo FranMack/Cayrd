@@ -6,10 +6,10 @@ export function Schedule() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="mb-4 text-center">
-          <h2 className="font-[var(--font-bebas)] text-4xl tracking-wide sm:text-5xl">
+          <h2 className="font-(--font-bebas) text-4xl tracking-wide sm:text-5xl">
             <span className="text-orange">Horarios</span>
           </h2>
-          <p className="mt-4 font-[var(--font-bebas)] text-2xl text-muted-foreground">
+          <p className="mt-4 font-(--font-bebas) text-2xl text-muted-foreground">
             2 VECES POR SEMANA. A TU RITMO.
           </p>
         </div>
@@ -19,8 +19,8 @@ export function Schedule() {
 
         {/* Note */}
         <p className="mt-6 text-center text-sm text-muted-foreground">
-          Lunes, miércoles y jueves 17hs y 18hs · Lunes, martes y jueves 17hs y
-          18hs
+          Los grupos A, B y C son fútbol. Martes y jueves: A de 17 a 18, B de 18
+          a 19 y C de 19 a 20. Hockey y A medida tienen horarios variables.
         </p>
       </div>
     </section>
