@@ -92,7 +92,7 @@ export function PhotoGrid() {
                   hoveredIndex === index ? "opacity-100" : "opacity-0"
                 }`}
               >
-                <p className="font-[var(--font-bebas)] text-xl text-white sm:text-2xl">
+                <p className="font-[var(--font-bebas)] text-xl text-white sm:text-2xl text-center">
                   {photo.caption}
                 </p>
               </div>

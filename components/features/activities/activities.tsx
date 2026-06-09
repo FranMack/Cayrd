@@ -2,28 +2,14 @@
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const activities = [
   {
-    title: "Fútbol A",
+    title: "Fútbol",
     description:
       "Martes y jueves de 17 a 18. Grupo de inicio y adaptación para entrar en ritmo.",
     tag: "MÁS POPULAR",
-    image: "images/futbol.jpg",
-  },
-  {
-    title: "Fútbol B",
-    description:
-      "Martes y jueves de 18 a 19. Trabajo técnico y de intensidad media.",
-    tag: null,
-    image: "images/futbol.jpg",
-  },
-  {
-    title: "Fútbol C",
-    description:
-      "Martes y jueves de 19 a 20. Grupo con mayor ritmo y enfoque competitivo.",
-    tag: null,
     image: "images/futbol.jpg",
   },
   {
@@ -33,10 +19,55 @@ const activities = [
     tag: null,
     image: "images/hockey.jpg",
   },
+  {
+    title: "Personalizado",
+    description:
+      "Entrenamientos adaptados a tus necesidades. Sesiones individuales o grupales para alcanzar tus objetivos.",
+    image: "images/personalizado.jpg",
+  },
 ];
 
 export function Activities() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const updateActiveIndex = () => {
+    const container = scrollRef.current;
+
+    if (!container) return;
+
+    const containerCenter = container.scrollLeft + container.clientWidth / 2;
+    const items = Array.from(container.children) as HTMLElement[];
+
+    let closestIndex = 0;
+    let closestDistance = Number.POSITIVE_INFINITY;
+
+    items.forEach((item, index) => {
+      const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+      const distance = Math.abs(itemCenter - containerCenter);
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    setActiveIndex(closestIndex);
+  };
+
+  useEffect(() => {
+    updateActiveIndex();
+
+    const container = scrollRef.current;
+
+    if (!container) return;
+
+    container.addEventListener("scroll", updateActiveIndex, { passive: true });
+
+    return () => {
+      container.removeEventListener("scroll", updateActiveIndex);
+    };
+  }, []);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -46,6 +77,21 @@ export function Activities() {
         behavior: "smooth",
       });
     }
+  };
+
+  const scrollToIndex = (index: number) => {
+    const container = scrollRef.current;
+
+    if (!container) return;
+
+    const target = container.children[index] as HTMLElement | undefined;
+
+    if (!target) return;
+
+    container.scrollTo({
+      left: target.offsetLeft - container.offsetLeft,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -120,9 +166,15 @@ export function Activities() {
         {/* Mobile navigation dots */}
         <div className="mt-6 flex justify-center gap-2 sm:hidden">
           {activities.map((_, index) => (
-            <div
+            <button
               key={index}
-              className="h-2 w-2 rounded-full bg-muted-foreground/30"
+              onClick={() => scrollToIndex(index)}
+              className={`h-2 rounded-full transition-all ${
+                index === activeIndex
+                  ? "w-6 bg-orange"
+                  : "w-2 bg-muted-foreground/30"
+              }`}
+              aria-label={`Ir a la actividad ${index + 1}`}
             />
           ))}
         </div>
