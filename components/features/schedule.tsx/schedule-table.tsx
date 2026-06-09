@@ -78,7 +78,7 @@ export function ScheduleTable() {
                   {row.hora}
                 </td>
                 {days.map((day) => (
-                  <td key={day} className="px-1 py-2 text-center sm:px-4">
+                  <td key={day} className="px-0 sm:px-2 py-2 text-center sm:px-4">
                     {row[day] ? (
                       <SessionPill type={row[day]} />
                     ) : (
