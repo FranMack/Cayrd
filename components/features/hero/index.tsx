@@ -12,7 +12,7 @@ export function Hero() {
       {/* Video/Image Background */}
       <div className="absolute inset-0">
         <Image
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-AV3bgzonTjfJPu2vgfi1CpDzYP8Q3r.png"
+          src="/images/hero.webp"
           alt="Canchas de fútbol al atardecer"
           fill
           className="object-cover"
